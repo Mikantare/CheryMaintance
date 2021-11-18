@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1021435823135",
+    "project_id": "cherymaintance",
+    "storage_bucket": "cherymaintance.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021435823135:android:180150c470f0859f57412a",
+        "android_client_info": {
+          "package_name": "com.example.cherymaintance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1021435823135-el2a45o5cjh8fd0e8jq8ucm6nffsvalj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cherymaintance",
+            "certificate_hash": "9250f94fa18b07585d36add3f6bddf44ee684fcc"
+          }
+        },
+        {
+          "client_id": "1021435823135-57sptr7o9l594hd2scqev0ekcvsjh4hp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCe3DDVmvxSHbcw1UHBpVsvIQfGeCNwk-E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1021435823135-57sptr7o9l594hd2scqev0ekcvsjh4hp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
