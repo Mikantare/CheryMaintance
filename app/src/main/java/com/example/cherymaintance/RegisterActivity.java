@@ -1,19 +1,27 @@
 package com.example.cherymaintance;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    private static final String TAG = "SigninMetod";
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
     private DatabaseReference usersDataBaseReference;
@@ -39,6 +47,13 @@ public class RegisterActivity extends AppCompatActivity {
         toogleLoginSignUpTextView = findViewById(R.id.toogleLoginSignUpTextView);
     }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null) {
+        }
+    }
 
     private boolean validateEmail() {
         String emailInput = getEmail();
@@ -96,13 +111,61 @@ public class RegisterActivity extends AppCompatActivity {
         String emailInput = getEmail();
         String passwordInput = getPassword();
 
+        if (isLogInModeActive) {
+            if (validateEmail() | validatePasswordToLogin()) {
+                mAuth.signInWithEmailAndPassword(emailInput, passwordInput)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d(TAG, "signInWithEmail:success");
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                    Toast.makeText(RegisterActivity.this, "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+            }
+        } else {
+            if (validateEmail() | validatePassword()) {
+                mAuth.createUserWithEmailAndPassword(emailInput, passwordInput)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d(TAG, "createUserWithEmail:success");
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                    Toast.makeText(RegisterActivity.this, "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+            }
+        }
+
 
     }
+
 
     public void toogleLoginSignUpUser(View view) {
         if (isLogInModeActive) {
             isLogInModeActive = false;
             loginSignInButton.setText("Sign Up");
+            toogleLoginSignUpTextView.setText("Or, log in");
+            textComfirmPassword.setVisibility(View.VISIBLE);
+        } else {
+            isLogInModeActive = true;
+            loginSignInButton.setText("Log In");
+            toogleLoginSignUpTextView.setText("or, Sign Up");
+            textComfirmPassword.setVisibility(View.GONE);
         }
     }
 }
