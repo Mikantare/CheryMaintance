@@ -3,6 +3,7 @@ package com.example.cherymaintance;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -51,7 +52,8 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onPostResume() {
         super.onPostResume();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null) {
+        if (currentUser != null) {
+            startActivity(new Intent(this, MainActivity.class));
         }
     }
 
@@ -121,6 +123,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d(TAG, "signInWithEmail:success");
                                     FirebaseUser user = mAuth.getCurrentUser();
+                                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -140,6 +143,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d(TAG, "createUserWithEmail:success");
                                     FirebaseUser user = mAuth.getCurrentUser();
+                                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w(TAG, "createUserWithEmail:failure", task.getException());
