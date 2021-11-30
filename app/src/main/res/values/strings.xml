@@ -4,4 +4,20 @@
     <string name="pasword_lenght_error">Password lenght have to be more then 6</string>
     <string name="password_not_math_error">Password have to match</string>
     <string name="empty_email_error">Please Input your Email</string>
+
+    <string-array name="numberOfMeintence">
+        <item>TO-0</item>
+        <item>TO-1</item>
+        <item>TO-2</item>
+        <item>TO-3</item>
+        <item>TO-4</item>
+        <item>TO-5</item>
+        <item>TO-6</item>
+        <item>TO-7</item>
+        <item>TO-8</item>
+        <item>TO-9</item>
+        <item>TO-10</item>
+    </string-array>
+
+
 </resources>

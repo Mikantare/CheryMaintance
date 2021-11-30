@@ -5,7 +5,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
-    android:background="#F4A8A8"
 android:layout_height="match_parent"
 tools:context=".MainActivity">
 
@@ -23,106 +22,25 @@ tools:context=".MainActivity">
             android:src="@drawable/chery_logo" />
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/spinnerModel"
             android:layout_width="match_parent"
             android:layout_margin="16dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp" />
 
         <Spinner
-            android:id="@+id/spinner2"
+            android:id="@+id/spinnerCarComplection"
             android:layout_width="match_parent"
             android:layout_margin="16dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp" />
 
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <Spinner
+            android:id="@+id/spinnerNumberOfMeintence"
             android:layout_margin="16dp"
-            android:layout_marginTop="40dp"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/TO0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="RadioButton" />
-
-            <RadioButton
-                android:id="@+id/radioButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="RadioButton" />
-
-            <RadioButton
-                android:id="@+id/radioButton3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="RadioButton" />
-
-            <RadioButton
-                android:id="@+id/radioButton4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="RadioButton" />
-
-            <RadioButton
-                android:id="@+id/radioButton5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="RadioButton" />
-        </RadioGroup>
-
-        <RadioGroup
-
-            android:layout_width="wrap_content"
-            android:layout_margin="16dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/radioButton6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="RadioButton" />
-
-            <RadioButton
-                android:id="@+id/radioButton7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="RadioButton" />
-
-            <RadioButton
-                android:id="@+id/radioButton8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="RadioButton" />
-
-            <RadioButton
-                android:id="@+id/radioButton9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="RadioButton" />
-
-            <RadioButton
-                android:id="@+id/radioButton10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="RadioButton" />
-
-
-        </RadioGroup>
+            android:entries="@array/numberOfMeintence"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
 
     </LinearLayout>
