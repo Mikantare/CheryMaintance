@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -25,9 +26,11 @@ public class MainActivity extends AppCompatActivity {
 
     private final String MODEL_REFERENCE = "model";
     private final String EQUIPEMENT_REFERENCE = "equipment";
+    private final String NUMBER_MAINTANCE_REFERENCE = "number";
 
     private Spinner spinnerModel;
     private Spinner spinnerCarComplection;
+    private Spinner spinnerNumberOfMeintence;
 
     private FirebaseAuth mAuth;
     private ChildEventListener maintanceChildEventListener;
@@ -40,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         spinnerModel = findViewById(R.id.spinnerModel);
         spinnerCarComplection = findViewById(R.id.spinnerCarComplection);
-        DataBaseReferenceListener dataBaseReferenceListener = new DataBaseReferenceListener();
+        spinnerNumberOfMeintence = findViewById(R.id.spinnerNumberOfMeintence);
+        spinnerNumberOfMeintence.setVisibility(View.GONE);
         getListModel();
 
         spinnerModel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -49,6 +53,31 @@ public class MainActivity extends AppCompatActivity {
 
                 String model = spinnerModel.getSelectedItem().toString();
                 getListEquipment(model);
+                spinnerNumberOfMeintence.setVisibility(View.VISIBLE);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        spinnerNumberOfMeintence.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                try {
+                    String model = spinnerModel.getSelectedItem().toString();
+                    String equipment = spinnerCarComplection.getSelectedItem().toString();
+                    String numberMaintence = spinnerNumberOfMeintence.getSelectedItem().toString();
+                    DatabaseReference numberMaintenceDataBaseReference = FirebaseDatabase.getInstance().
+                            getReference().child(model).child(equipment).child(numberMaintence);
+                    if (model != null && equipment != null) {
+                        Log.d("TAGFIREBASE", numberMaintence);
+                        getDataSnapchot(numberMaintenceDataBaseReference,NUMBER_MAINTANCE_REFERENCE);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
             }
 
@@ -83,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
             case EQUIPEMENT_REFERENCE:
                 spinnerCarComplection.setAdapter(adapter);
                 break;
+
         }
     }
 
@@ -93,9 +123,15 @@ public class MainActivity extends AppCompatActivity {
         maintanceChildEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Log.d("TAGFIREBASE", snapshot.getKey());
-                list.add(snapshot.getKey());
-                assingValueSpiners(list, reference);
+                    if (reference.equals(NUMBER_MAINTANCE_REFERENCE)) {
+                        Log.d("TAGFIREBASE", "qq" + snapshot.getValue());
+                        Toast.makeText(MainActivity.this, "" + snapshot.getValue(), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Log.d("TAGFIREBASE", snapshot.getKey());
+                        list.add(snapshot.getKey());
+                        assingValueSpiners(list, reference);
+                    }
+
             }
 
 
