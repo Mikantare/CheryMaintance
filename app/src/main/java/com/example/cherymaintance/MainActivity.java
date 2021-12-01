@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private Spinner spinnerModel;
     private Spinner spinnerCarComplection;
     private Spinner spinnerNumberOfMeintence;
+    private TextView textViewPriceMaintance;
 
     private FirebaseAuth mAuth;
     private ChildEventListener maintanceChildEventListener;
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         spinnerModel = findViewById(R.id.spinnerModel);
         spinnerCarComplection = findViewById(R.id.spinnerCarComplection);
         spinnerNumberOfMeintence = findViewById(R.id.spinnerNumberOfMeintence);
+        textViewPriceMaintance = findViewById(R.id.textViewPriceMaintance);
         spinnerNumberOfMeintence.setVisibility(View.GONE);
         getListModel();
 
@@ -69,8 +72,6 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     String model = spinnerModel.getSelectedItem().toString();
                     String equipment = spinnerCarComplection.getSelectedItem().toString();
-
-
                     DatabaseReference numberMaintenceDataBaseReference = FirebaseDatabase.getInstance().
                             getReference().child(model).child(equipment);
                     if (model != null && equipment != null) {
@@ -79,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             }
 
             @Override
@@ -127,9 +127,9 @@ public class MainActivity extends AppCompatActivity {
                 if (reference.equals(NUMBER_MAINTANCE_REFERENCE)) {
                     String numberMaintence = spinnerNumberOfMeintence.getSelectedItem().toString().trim();
                     if (snapshot.getKey().equals(numberMaintence)) {
-                    Toast.makeText(MainActivity.this, "" + snapshot.getValue(), Toast.LENGTH_SHORT).show();}
+                        textViewPriceMaintance.setText(snapshot.getValue().toString());
+                    }
                 } else {
-                    Log.d("TAGFIREBASE", snapshot.getKey());
                     list.add(snapshot.getKey());
                     assingValueSpiners(list, reference);
                 }
