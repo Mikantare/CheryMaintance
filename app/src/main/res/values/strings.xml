@@ -6,17 +6,17 @@
     <string name="empty_email_error">Please Input your Email</string>
 
     <string-array name="numberOfMeintence">
-        <item>TO-0</item>
-        <item>TO-1</item>
-        <item>TO-2</item>
-        <item>TO-3</item>
-        <item>TO-4</item>
-        <item>TO-5</item>
-        <item>TO-6</item>
-        <item>TO-7</item>
-        <item>TO-8</item>
-        <item>TO-9</item>
-        <item>TO-10</item>
+        <item>TO0</item>
+        <item>TO1</item>
+        <item>TO2</item>
+        <item>TO3</item>
+        <item>TO4</item>
+        <item>TO5</item>
+        <item>TO6</item>
+        <item>TO7</item>
+        <item>TO8</item>
+        <item>TO9</item>
+        <item>TO10</item>
     </string-array>
 
 

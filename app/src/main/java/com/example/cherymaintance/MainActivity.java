@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private ChildEventListener maintanceChildEventListener;
 
     private ArrayAdapter<String> adapter;
+    int i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,12 +69,12 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     String model = spinnerModel.getSelectedItem().toString();
                     String equipment = spinnerCarComplection.getSelectedItem().toString();
-                    String numberMaintence = spinnerNumberOfMeintence.getSelectedItem().toString();
+
+
                     DatabaseReference numberMaintenceDataBaseReference = FirebaseDatabase.getInstance().
-                            getReference().child(model).child(equipment).child(numberMaintence);
+                            getReference().child(model).child(equipment);
                     if (model != null && equipment != null) {
-                        Log.d("TAGFIREBASE", numberMaintence);
-                        getDataSnapchot(numberMaintenceDataBaseReference,NUMBER_MAINTANCE_REFERENCE);
+                        getDataSnapchot(numberMaintenceDataBaseReference, NUMBER_MAINTANCE_REFERENCE);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -117,20 +118,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     private void getDataSnapchot(DatabaseReference dataBaseReference, String reference) {
+
         List<String> list = new ArrayList<>();
         maintanceChildEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                    if (reference.equals(NUMBER_MAINTANCE_REFERENCE)) {
-                        Log.d("TAGFIREBASE", "qq" + snapshot.getValue());
-                        Toast.makeText(MainActivity.this, "" + snapshot.getValue(), Toast.LENGTH_SHORT).show();
-                    } else {
-                        Log.d("TAGFIREBASE", snapshot.getKey());
-                        list.add(snapshot.getKey());
-                        assingValueSpiners(list, reference);
-                    }
+                if (reference.equals(NUMBER_MAINTANCE_REFERENCE)) {
+                    String numberMaintence = spinnerNumberOfMeintence.getSelectedItem().toString().trim();
+                    if (snapshot.getKey().equals(numberMaintence)) {
+                    Toast.makeText(MainActivity.this, "" + snapshot.getValue(), Toast.LENGTH_SHORT).show();}
+                } else {
+                    Log.d("TAGFIREBASE", snapshot.getKey());
+                    list.add(snapshot.getKey());
+                    assingValueSpiners(list, reference);
+                }
 
             }
 
